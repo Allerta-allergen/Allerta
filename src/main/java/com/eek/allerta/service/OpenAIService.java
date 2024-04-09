@@ -50,7 +50,7 @@ public class OpenAIService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(body)
                 .retrieve()
-                .toString();
+                .body(String.class);
     }
 
     public String textRequest() {

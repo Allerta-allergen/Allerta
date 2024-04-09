@@ -53,7 +53,8 @@ public class OpenAIService {
                 .retrieve()
                 .body(OpenAIResponse.class);
         return responseBody != null && !responseBody.getChoices().isEmpty() ?
-                responseBody.getChoices().get(0).getMessage().getContent() : null;
+                responseBody.getChoices().get(0).getMessage().getContent()
+                        .replaceAll("```(json)?", "") : null;
 
     }
 

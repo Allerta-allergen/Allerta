@@ -25,12 +25,12 @@ public class OpenAIService {
         return "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(bytes);
     }
 
-    public String visionRequest(MultipartFile file) throws IOException {
+    public List<?> visionRequest(MultipartFile file) throws IOException {
         OpenAIRequest body = new OpenAIRequest();
         OpenAIRequest.Message message = new OpenAIRequest.Message();
         OpenAIRequest.Message.Content contentText = new OpenAIRequest.Message.Content();
         contentText.setType("text");
-        contentText.setText("Respond in json only; render English for strings such as ingredients and descriptions; if the information is not in English, prioritise reading Estonian; if corresponding information is not indicated, return null or an empty array. What is this food? If the name of the food is not indicated, or if this is not food, return null for \\\"food\\\". Does this image contain a list of ingredients? If you see a list of ingredients, do not add ingredients the label doesn't specify. What are the ingredients and the potential allergens among them? Does the label specify if the factory also processes or is free from other ingredients? The user is allergic to nuts. What are the ingredients we have gathered so far that are allergens specific to the user? The user understands that your adivce may be inaccurate and should not be the sole source consulted for life-threatening allergies. Follow this structure: \\n{\\\"food\\\":\\\"Rice cake\\\",\\\"is_ingredients_label\\\":true,\\\"contains\\\":[{\\\"name\\\":\\\"Rice flour\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":false,\\\"description\\\":null},{\\\"name\\\":\\\"Corn flour\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true,\\\"description\\\":\\\"Contains corn\\\"},{\\\"name\\\":\\\"Mono and diglycerides\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true,\\\"description\\\":\\\"May contain trace amount of soy or milk\\\"}],\\\"factory\\\":{\\\"free_from\\\":[\\\"gluten\\\"],\\\"processes\\\":[{\\\"name\\\":\\\"Peanuts\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true\\\"description\\\":null},{\\\"name\\\":\\\"Milk\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true\\\"description\\\":null}]}}");
+        contentText.setText("Respond in json only; render English for strings such as ingredients and descriptions; if the information is not in English, prioritise reading Estonian; if corresponding information is not indicated, return null or an empty array. What is this food? If the name of the food is not indicated, or if this is not food, return null for \\\"food\\\". Does this image contain a list of ingredients? If you see a list of ingredients, do not add ingredients the label doesn't specify. What are the ingredients and the potential allergens among them? Does the label specify if the factory also processes or is free from other ingredients? The user is allergic to nuts. What are the ingredients we have gathered so far that are allergens specific to the user? The user understands that your advice may be inaccurate and should not be the sole source consulted for life-threatening allergies. Follow this structure: \\n{\\\"food\\\":\\\"Rice cake\\\",\\\"is_ingredients_label\\\":true,\\\"contains\\\":[{\\\"name\\\":\\\"Rice flour\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":false,\\\"description\\\":null},{\\\"name\\\":\\\"Corn flour\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true,\\\"description\\\":\\\"Contains corn\\\"},{\\\"name\\\":\\\"Mono and diglycerides\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true,\\\"description\\\":\\\"May contain trace amount of soy or milk\\\"}],\\\"factory\\\":{\\\"free_from\\\":[\\\"gluten\\\"],\\\"processes\\\":[{\\\"name\\\":\\\"Peanuts\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true\\\"description\\\":null},{\\\"name\\\":\\\"Milk\\\",\\\"user_allergen\\\":false,\\\"potential_allergen\\\":true\\\"description\\\":null}]}}");
         OpenAIRequest.Message.Content contentImage = new OpenAIRequest.Message.Content();
         contentImage.setType("image_url");
         contentImage.setImageUrl(new OpenAIRequest.Message.Content.ImageUrl().setUrl(photoToBase64(file)));
@@ -50,7 +50,7 @@ public class OpenAIService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(body)
                 .retrieve()
-                .body(String.class);
+                .toEntity(List.class).getBody();
     }
 
     public String textRequest() {

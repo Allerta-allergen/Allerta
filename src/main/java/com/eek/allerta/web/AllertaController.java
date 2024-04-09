@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("api")
@@ -17,7 +18,7 @@ public class AllertaController {
     private final AllertaService allertaService;
 
     @PostMapping("photo")
-    public String photo(@RequestParam("image") MultipartFile photo) throws IOException {
+    public List<?> photo(@RequestParam("image") MultipartFile photo) throws IOException {
         return allertaService.getFoodDTO(photo);
     }
 

@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Heading, Button, Divider, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+  const [questionnaireAnswer, setQuestionnaireAnswer] = useState('');
 
-    const navigate = useNavigate(); // Move useNavigate inside the component
-
+  // Function to handle modifying the questionnaire
   const handleModifyQuestionnaire = () => {
-    // Logic to modify questionnaire
-    // This is just a placeholder
+    // Logic to modify questionnaire (e.g., send to server)
     alert('Questionnaire modified!');
   };
 
+  // Function to handle logout
   const handleLogout = () => {
     // Logic to logout
-    // This is just a placeholder
     alert('Logged out!');
     setTimeout(() => {
-        navigate('/login');
-      }, 1000);
+      navigate('/login');
+    }, 1000);
   };
 
   return (
@@ -26,8 +26,13 @@ const ProfilePage = () => {
       <Heading as="h1" size="xl">Profile Settings</Heading>
       <Divider my={6} />
       <FormControl mb={4}>
-        <FormLabel>Modify Questionnaire</FormLabel>
-        <Textarea placeholder="Enter modified questionnaire here..." rows={8} />
+        <FormLabel>Questionnaire Answer</FormLabel>
+        <Textarea
+          placeholder="Enter modified questionnaire here..."
+          rows={8}
+          value={questionnaireAnswer}
+          onChange={(e) => setQuestionnaireAnswer(e.target.value)} // Update questionnaire answer state
+        />
       </FormControl>
       <Button colorScheme="blue" onClick={handleModifyQuestionnaire} mb={4}>Save Changes</Button>
       <Divider my={6} />

@@ -1,127 +1,121 @@
-
-import React from 'react';
-import {
-  Box,
-  Heading,
-  Text,
-  Divider,
-  VStack,
-  Card,
-} from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Box, Heading, Text, Divider, VStack, Card, Image } from '@chakra-ui/react';
 
 const ResultsPage = () => {
-  const data = {
-      "food": "Milk chocolate",
-      "is_ingredients_label": true,
-      "contains": [
-        {
-          "name": "Sugar",
-          "user_allergen": false,
-          "potential_allergen": false,
-          "description": null
-        },
-        {
-          "name": "Cocoa butter",
-          "user_allergen": false,
-          "potential_allergen": false,
-          "description": null
-        },
-        {
-          "name": "Cocoa mass",
-          "user_allergen": false,
-          "potential_allergen": false,
-          "description": null
-        },
-        {
-          "name": "Whole milk powder",
-          "user_allergen": false,
-          "potential_allergen": true,
-          "description": "Contains milk"
-        },
-        {
-          "name": "Whey powder",
-          "user_allergen": false,
-          "potential_allergen": true,
-          "description": "Contains milk"
-        },
-        {
-          "name": "Milk fat",
-          "user_allergen": false,
-          "potential_allergen": true,
-          "description": "Contains milk"
-        },
-        {
-          "name": "Emulsifier (lecithins)",
-          "user_allergen": false,
-          "potential_allergen": true,
-          "description": "Commonly soy or sunflower origin"
-        },
-        {
-          "name": "Vanillin",
-          "user_allergen": false,
-          "potential_allergen": false,
-          "description": null
-        },
-        {
-          "name": "Minimum Cocoa Solids",
-          "user_allergen": false,
-          "potential_allergen": false,
-          "description": null
-        }
-      ],
-      "factory": {
-        "free_from": null,
-        "processes": [
-          {
-            "name": null,
-            "user_allergen": false,
-            "potential_allergen": false,
-            "description": "Specific additional ingredients processed in the factory are not indicated"
-          }
-        ]
-      }
-    };
 
-    if (!data.is_ingredients_label) {
-      return (
-        <Box p={8}>
-          <Text>Error: Ingredient label not found</Text>
-        </Box>
-      );
-    }
- 
+  const location = useLocation();
+  const imageData = location.state?.imageData; // Retrieve image data from location state
+  console.log('Image data:', imageData); // Check the image data
+
+  // Render loading state while waiting for data
+  if (!imageData) {
     return (
       <Box p={8}>
-        <Heading as="h1" size="xl">Results</Heading>
-        <Divider my={6} />
-        <VStack align="start" spacing={6}>
-          {data.contains.map((ingredient, index) => (
-            <Card key={index} p={4} flex="1" bg="gray.100">
-              <Box>
-                <Heading as="h2" size="lg" mb={4}>{ingredient.name}</Heading>
-                <VStack align="start" spacing={4}>
-                  <Text fontSize="lg"><strong>Details:</strong></Text>
-                  <Text>{`Potential Allergen: ${ingredient.potential_allergen}`}</Text>
-                  {ingredient.description && (
-                    <Text>{`Description: ${ingredient.description}`}</Text>
-                  )}
-                  {/* Render additional fields that are not null and not false */}
-                  {Object.entries(ingredient)
-                    .filter(([key, value]) => key !== 'description' && value !== null && value !== false)
-                    .map(([key, value]) => (
-                      <Text key={key}>{`${key}: ${value}`}</Text>
-                    ))}
-                </VStack>
-              </Box>
-            </Card>
-          ))}
-        </VStack>
-        <Divider my={6} />
-        <Heading as="h2" size="lg">Factory Processes:</Heading>
-        <Text>{data.factory.processes[0].description}</Text>
+        <Text>Loading...</Text>
       </Box>
     );
-  };
+  }
+
+  // Access data from the response
+  const data = imageData.data;
+
   
+
+  if (!data) {
+    return (
+      <Box p={8}>
+        <Text>Loading...</Text>
+      </Box>
+    );
+  }
+
+  if (!data.is_ingredients_label) {
+    return (
+      <Box p={8}>
+        <Text>Error: Ingredient label not found</Text>
+      </Box>
+    );
+  }
+
+  const potentialAllergens = [];
+  const otherIngredients = [];
+
+  data.contains.forEach((ingredient, index) => {
+    if (ingredient.user_allergen) {
+      potentialAllergens.push(
+        <Card key={index} p={4} flex="1" bg="gray.100">
+          <Box>
+            <Heading as="h2" size="lg" mb={4}>
+              {ingredient.name}
+            </Heading>
+            <VStack align="start" spacing={4}>
+              {ingredient.user_allergen && (
+                <Text color="red">You are allergic to {ingredient.name}</Text>
+              )}
+              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+            </VStack>
+          </Box>
+        </Card>
+      );
+    } else if (ingredient.potential_allergen || ingredient.user_allergen) {
+      potentialAllergens.push(
+        <Card key={index} p={4} flex="1" bg="gray.100">
+          <Box>
+            <Heading as="h2" size="lg" mb={4}>
+              {ingredient.name}
+            </Heading>
+            <VStack align="start" spacing={4}>
+              {ingredient.user_allergen && (
+                <Text color="red">You are allergic to {ingredient.name}</Text>
+              )}
+              {ingredient.potential_allergen && (
+                <Text color="red">You can be allergic to {ingredient.name}</Text>
+              )}
+
+              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+            </VStack>
+          </Box>
+        </Card>
+      );
+    } else {
+      otherIngredients.push(
+        <Card key={index} p={4} flex="1" bg="gray.100">
+          <Box>
+            <Heading as="h2" size="lg" mb={4}>
+              {ingredient.name}
+            </Heading>
+            <VStack align="start" spacing={4}>
+              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+            </VStack>
+          </Box>
+        </Card>
+      );
+    }
+  });
+
+  return (
+    <Box p={8}>
+      <Heading as="h1" size="xl">
+        Results
+      </Heading>
+      <Divider my={6} />
+      {image && <Image src={URL.createObjectURL(image)} alt="Uploaded" />}
+      <VStack align="start" spacing={6}>
+        {potentialAllergens}
+        <Divider my={6} />
+        <Heading as="h2" size="lg">
+          Other Ingredients
+        </Heading>
+        {otherIngredients}
+      </VStack>
+      <Divider my={6} />
+      <Heading as="h2" size="lg">
+        Factory Processes:
+      </Heading>
+      <Text>{data.factory.processes[0].description}</Text>
+    </Box>
+  );
+};
 
 export default ResultsPage;

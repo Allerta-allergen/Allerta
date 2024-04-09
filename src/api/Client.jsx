@@ -2,9 +2,6 @@ import axios from "axios";
 
 const Client = {
 
-    getAllStudySpaces(){
-        return axios.get("api/upload")
-    },
     uploadFile(image){
         return axios.post("api/upload", image)
     },

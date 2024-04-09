@@ -1,7 +1,6 @@
 package com.eek.allerta.web;
 
 import com.eek.allerta.dto.FoodDTO;
-import com.eek.allerta.dto.OpenAIResponse;
 import com.eek.allerta.service.AllertaService;
 import com.eek.allerta.service.FakeService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,7 @@ public class AllertaController {
     private final AllertaService allertaService;
 
     @PostMapping("photo")
-    public String photo(@RequestParam("image") MultipartFile photo) throws IOException {
+    public FoodDTO photo(@RequestParam("image") MultipartFile photo) throws IOException {
         return allertaService.getFoodDTO(photo);
     }
 

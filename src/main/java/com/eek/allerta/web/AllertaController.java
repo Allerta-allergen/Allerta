@@ -17,12 +17,8 @@ public class AllertaController {
     private final AllertaService allertaService;
 
     @PostMapping("photo")
-    public String photo(@RequestParam("file") MultipartFile photo) throws IOException {
-        if(!photo.isEmpty()) {
-            byte[] bytes = photo.getBytes();
-            return Base64.getEncoder().encodeToString(bytes);
-        }
-        return null;
+    public FoodDTO photo(@RequestParam("image") MultipartFile photo) throws IOException {
+        return allertaService.getFoodDTO(photo);
     }
 
     @PostMapping("photo_fake")
@@ -36,10 +32,5 @@ public class AllertaController {
     @GetMapping("hello")
     public String hello() {
         return "hello";
-    }
-
-    @GetMapping("test")
-    public String test() {
-        return allertaService.getTEST();
     }
 }

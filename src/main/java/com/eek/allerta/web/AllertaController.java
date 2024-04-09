@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
 
 @RestController
 @RequestMapping("api")
@@ -27,7 +26,7 @@ public class AllertaController {
     }
 
     @PostMapping("photo_fake")
-    public FoodDTO photoFake(@RequestParam("file") MultipartFile photo) {
+    public FoodDTO photoFake(@RequestParam("image") MultipartFile photo) {
         if (!photo.isEmpty()) {
             return fakeService.getFoodDTO();
         }

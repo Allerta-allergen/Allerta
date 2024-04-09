@@ -26,7 +26,7 @@ public class OpenAIService {
         return "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(bytes);
     }
 
-    public OpenAIResponse visionRequest(MultipartFile file) throws IOException {
+    public String visionRequest(MultipartFile file) throws IOException{
         OpenAIRequest body = new OpenAIRequest();
         OpenAIRequest.Message message = new OpenAIRequest.Message();
         OpenAIRequest.Message.Content contentText = new OpenAIRequest.Message.Content();
@@ -51,7 +51,7 @@ public class OpenAIService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(body)
                 .retrieve()
-                .body(OpenAIResponse.class);
+                .body(String.class);
     }
 
     public String textRequest() {

@@ -18,7 +18,7 @@ public class AllertaController {
     private final AllertaService allertaService;
 
     @PostMapping("photo")
-    public OpenAIResponse photo(@RequestParam("image") MultipartFile photo) throws IOException {
+    public String photo(@RequestParam("image") MultipartFile photo) throws IOException {
         return allertaService.getFoodDTO(photo);
     }
 

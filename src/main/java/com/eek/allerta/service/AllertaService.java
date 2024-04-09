@@ -12,7 +12,7 @@ import java.io.IOException;
 public class AllertaService {
     private final OpenAIService openAIService;
 
-    public OpenAIResponse getFoodDTO(MultipartFile file) throws IOException {
+    public String getFoodDTO(MultipartFile file) throws IOException {
         if(file != null && file.getSize() > 0 && file.getContentType() != null && file.getContentType().contains("image")) {
             return openAIService.visionRequest(file);
         }

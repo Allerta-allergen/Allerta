@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 import java.util.List;
 
 @Data
-@Accessors(chain = true)
+@Accessors
 public class OpenAIResponse {
     private String id;
     private String object;
@@ -16,6 +16,7 @@ public class OpenAIResponse {
     private List<Choice> choices;
 
     @Data
+    @Accessors
     public static class Choice {
         private Integer index;
         private Message message;
@@ -28,12 +29,14 @@ public class OpenAIResponse {
     }
 
     @Data
+    @Accessors
     public static class Message {
         private String role;
         private String content;
     }
 
     @Data
+    @Accessors
     public static class Usage {
         @JsonProperty("prompt_tokens")
         private Integer promptTokens;

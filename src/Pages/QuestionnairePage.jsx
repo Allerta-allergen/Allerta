@@ -47,8 +47,8 @@ const QuestionnairePage = () => {
             placeholder="I have..."
           />
         </FormControl>
-        <Button type="submit" colorScheme="blue">Submit</Button>
-        <Button as={RouterLink} to="/home" colorScheme="blue">Skip Questionnaire</Button>
+        <Button type="submit" colorScheme="blue" >Submit</Button>
+        {/* <Button as={RouterLink} to="/home" colorScheme="blue">Skip Questionnaire</Button> */}
 
       </VStack>
     </Box>

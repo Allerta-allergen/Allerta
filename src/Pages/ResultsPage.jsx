@@ -3,96 +3,68 @@ import { useLocation } from 'react-router-dom';
 import { Box, Heading, Text, Divider, VStack, Card, Image } from '@chakra-ui/react';
 
 const ResultsPage = () => {
-
   const location = useLocation();
   const imageData = location.state?.imageData; // Retrieve image data from location state
   console.log('Image data:', imageData); // Check the image data
 
-  // Render loading state while waiting for data
-  if (!imageData) {
-    return (
-      <Box p={8}>
-        <Text>Loading...</Text>
-      </Box>
-    );
-  }
-
-  // Access data from the response
-  const data = imageData.data;
-
-  
-
-  if (!data) {
-    return (
-      <Box p={8}>
-        <Text>Loading...</Text>
-      </Box>
-    );
-  }
-
-  if (!data.is_ingredients_label) {
-    return (
-      <Box p={8}>
-        <Text>Error: Ingredient label not found</Text>
-      </Box>
-    );
-  }
-
   const potentialAllergens = [];
   const otherIngredients = [];
 
-  data.contains.forEach((ingredient, index) => {
-    if (ingredient.user_allergen) {
-      potentialAllergens.push(
-        <Card key={index} p={4} flex="1" bg="gray.100">
-          <Box>
-            <Heading as="h2" size="lg" mb={4}>
-              {ingredient.name}
-            </Heading>
-            <VStack align="start" spacing={4}>
-              {ingredient.user_allergen && (
-                <Text color="red">You are allergic to {ingredient.name}</Text>
-              )}
-              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
-            </VStack>
-          </Box>
-        </Card>
-      );
-    } else if (ingredient.potential_allergen || ingredient.user_allergen) {
-      potentialAllergens.push(
-        <Card key={index} p={4} flex="1" bg="gray.100">
-          <Box>
-            <Heading as="h2" size="lg" mb={4}>
-              {ingredient.name}
-            </Heading>
-            <VStack align="start" spacing={4}>
-              {ingredient.user_allergen && (
-                <Text color="red">You are allergic to {ingredient.name}</Text>
-              )}
-              {ingredient.potential_allergen && (
-                <Text color="red">You can be allergic to {ingredient.name}</Text>
-              )}
+  // Assuming image URL property name in imageData is 'imageUrl'
+  const imageUrl = imageData?.imageUrl; // Access image URL using optional chaining
 
-              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
-            </VStack>
-          </Box>
-        </Card>
-      );
-    } else {
-      otherIngredients.push(
-        <Card key={index} p={4} flex="1" bg="gray.100">
-          <Box>
-            <Heading as="h2" size="lg" mb={4}>
-              {ingredient.name}
-            </Heading>
-            <VStack align="start" spacing={4}>
-              {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
-            </VStack>
-          </Box>
-        </Card>
-      );
-    }
-  });
+  imageData?.contains.forEach((ingredient, index) => {
+    if (ingredient.user_allergen) {
+            potentialAllergens.push(
+              <Card key={index} p={4} flex="1" bg="gray.100">
+                <Box>
+                  <Heading as="h2" size="lg" mb={4}>
+                    {ingredient.name}
+                  </Heading>
+                  <VStack align="start" spacing={4}>
+                    {ingredient.user_allergen && (
+                      <Text color="red">You are allergic to {ingredient.name}</Text>
+                    )}
+                    {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+                  </VStack>
+                </Box>
+              </Card>
+            );
+          } else if (ingredient.potential_allergen || ingredient.user_allergen) {
+            potentialAllergens.push(
+              <Card key={index} p={4} flex="1" bg="gray.100">
+                <Box>
+                  <Heading as="h2" size="lg" mb={4}>
+                    {ingredient.name}
+                  </Heading>
+                  <VStack align="start" spacing={4}>
+                    {ingredient.user_allergen && (
+                      <Text color="red">You are allergic to {ingredient.name}</Text>
+                    )}
+                    {ingredient.potential_allergen && (
+                      <Text color="red">You can be allergic to {ingredient.name}</Text>
+                    )}
+      
+                    {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+                  </VStack>
+                </Box>
+              </Card>
+            );
+          } else {
+            otherIngredients.push(
+              <Card key={index} p={4} flex="1" bg="gray.100">
+                <Box>
+                  <Heading as="h2" size="lg" mb={4}>
+                    {ingredient.name}
+                  </Heading>
+                  <VStack align="start" spacing={4}>
+                    {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+                  </VStack>
+                </Box>
+              </Card>
+            );
+          }
+        });
 
   return (
     <Box p={8}>
@@ -100,7 +72,7 @@ const ResultsPage = () => {
         Results
       </Heading>
       <Divider my={6} />
-      {image && <Image src={URL.createObjectURL(image)} alt="Uploaded" />}
+      {imageUrl && <Image src={imageUrl} alt="Uploaded" />} {/* Use imageUrl */}
       <VStack align="start" spacing={6}>
         {potentialAllergens}
         <Divider my={6} />
@@ -113,7 +85,9 @@ const ResultsPage = () => {
       <Heading as="h2" size="lg">
         Factory Processes:
       </Heading>
-      <Text>{data.factory.processes[0].description}</Text>
+      <Text>        
+        {imageData?.factory?.processes[0]?.description || 'No description available for factory processes'}
+      </Text> {/* Use optional chaining */}
     </Box>
   );
 };

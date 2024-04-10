@@ -18,4 +18,8 @@ public class AllertaService {
         }
         return null;
     }
+
+    public FoodDTO getFoodDTO(String ingredients) {
+        return ingredients.isEmpty() ? null : openAIService.textRequest(ingredients);
+    }
 }

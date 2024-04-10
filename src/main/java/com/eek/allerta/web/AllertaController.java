@@ -18,12 +18,26 @@ public class AllertaController {
 
     @PostMapping("photo")
     public FoodDTO photo(@RequestParam("image") MultipartFile photo) throws IOException {
+        // AllertaService handles validation
         return allertaService.getFoodDTO(photo);
+    }
+
+    @PostMapping("text")
+    public FoodDTO text(@RequestParam("ingredients") String text) {
+        return allertaService.getFoodDTO(text);
     }
 
     @PostMapping("photo_fake")
     public FoodDTO photoFake(@RequestParam("image") MultipartFile photo) {
         if (!photo.isEmpty()) {
+            return fakeService.getFoodDTO();
+        }
+        return null;
+    }
+
+    @PostMapping("text_fake")
+    public FoodDTO textFake(@RequestParam("ingredients") String text) {
+        if (!text.isEmpty()) {
             return fakeService.getFoodDTO();
         }
         return null;

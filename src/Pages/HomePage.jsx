@@ -1,12 +1,52 @@
 import React, { useState,useEffect } from 'react';
-import { Box, Heading, FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+import { Box, Heading, FormControl, FormLabel, Input, Button,Spacer } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 const HomePage = () => {
+  const [ingredients, setIngredients] = useState('');
+
   const [searchInput, setSearchInput] = useState('');
   const [imageData, setImageData] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Define setIsLoading state
   const navigate = useNavigate();
+  const {t} = useTranslation();
+
+
+  const handleAnalyzeIngredients = async () => {
+    console.log(ingredients)
+    setIsLoading(true); // Set loading state (optional)
+    try {
+      const formData = new FormData();
+  
+      // Add ingredients to FormData
+      formData.append('ingredients', ingredients); // Assuming API expects 'ingredients' field
+      console.log(formData);
+      const response = await fetch('https://allerta-58721-7cd6fa500797.herokuapp.com/api/text_fake', {
+        method: 'POST',
+        body: formData,
+        // body: ingredients, // Directly use ingredients as body
+        // headers: { 'Content-Type': 'text/plain' },
+        mode: 'no-cors'
+      });
+  
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      // Process the analysis data (navigate to ResultsPage, etc.)
+    } catch (error) {
+      console.error('Error fetching analysis data:', error);
+      // Handle errors appropriately (display user-friendly message)
+    } finally {
+      setIsLoading(false); // Reset loading state (optional)
+    }
+  };
+  
 
   const handleImageUpload = async (event) => {
     try {
@@ -17,6 +57,7 @@ const HomePage = () => {
       const response = await fetch('https://allerta-58721-7cd6fa500797.herokuapp.com/api/photo', {
         method: 'POST',
         body: formData,
+        
       });
 
       if (response.ok) {
@@ -41,10 +82,10 @@ const HomePage = () => {
 
   return (
     <Box p={8}>
-      <Heading as="h1" size="xl">Convert Ingredient to Potential Allergen</Heading>
+      <Heading as="h1" size="xl">{t('convert')}</Heading>
       <Box mt={6}>
         <FormControl>
-          <FormLabel>Enter list of ingredients or upload a photo of a product label</FormLabel>
+          <FormLabel>{t('ingredients')}</FormLabel>
           <Input
             type="file"
             accept="image/png, image/jpeg"
@@ -52,14 +93,18 @@ const HomePage = () => {
             mb={4}
           />
         </FormControl>
-        <Heading as="h2" size="md" mt={6} mb={2}>Or</Heading>
+        <Heading as="h2" size="md" mt={6} mb={2}>{t('or')}</Heading>
         <Input
-          type="text"
-          placeholder="Enter ingredients"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          size="lg"
-        />
+            type="text"
+            name="ingredients"
+            placeholder={t('Enter')}
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
+            size="lg"
+            mb={4}
+          />
+        <Box display="flex" alignItems="center"> 
+        
         <Button
           as={RouterLink}
           to={{
@@ -70,10 +115,15 @@ const HomePage = () => {
           mt={4}
           ml={2}
           isLoading={isUploading}
-          isDisabled={isUploading}
+          isDisabled={true}
         >
-          Search
+          {t('search')}
         </Button>
+        <Spacer />
+        <Button mt={4} colorScheme="blue" onClick={handleAnalyzeIngredients}>
+        {t('analyse')}
+      </Button>
+      </Box>
       </Box>
     </Box>
   );

@@ -11,12 +11,14 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const LoginPage = () => {
   const toast = useToast();
   const navigate = useNavigate(); // Move useNavigate inside the component
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {t} = useTranslation();
 
   const handleLogin = () => {
     // Here you can implement your login logic
@@ -42,24 +44,24 @@ const LoginPage = () => {
     >
       <Box p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
         <Box textAlign="center">
-          <Heading>Login</Heading>
-          <Text mt={2} color="gray.500">Enter your credentials to continue</Text>
+          <Heading>{t('login')}</Heading>
+          <Text mt={2} color="gray.500">{t('credentials')}</Text>
         </Box>
         <Box mt={4}>
           <FormControl>
-            <FormLabel>Email Address</FormLabel>
+            <FormLabel>{t('email')}</FormLabel>
             <Input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t('username')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <FormControl mt={4}>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>{t('pass')}</FormLabel>
             <Input
               type="password"
-              placeholder="Enter your password"
+              placeholder={t('password')}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -70,7 +72,7 @@ const LoginPage = () => {
             mt={4}
             onClick={handleLogin}
           >
-            Sign In
+            {t('sign')}
           </Button>
         </Box>
       </Box>

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from './containers/Footer'
 import './App.css'
 import { ChakraProvider } from '@chakra-ui/react'
-
+import './i18n';
 
 
 function App() {

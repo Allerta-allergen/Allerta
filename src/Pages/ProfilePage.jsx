@@ -10,6 +10,7 @@ const ProfilePage = () => {
   const handleModifyQuestionnaire = () => {
     // Logic to modify questionnaire (e.g., send to server)
     alert('Questionnaire modified!');
+    navigate('/home')
   };
 
   // Function to handle logout

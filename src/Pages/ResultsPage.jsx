@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Box, Heading, Text, Divider, VStack, Card, Image } from '@chakra-ui/react';
+import { useLocation, Link as RouterLink } from 'react-router-dom';
+import { Box, Heading, Text, Divider, VStack, Card, Image,Button } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 
 const ResultsPage = () => {
@@ -78,7 +78,7 @@ return (
         {potentialAllergens}
         <Divider my={6} />
         <Heading as="h2" size="lg">
-              {t('no')}
+              {t('inal')}
         </Heading>
         {imageData.contains.map((ingredient, index) => (
           <Card key={index} p={4} flex="1" bg="gray.100">
@@ -95,8 +95,13 @@ return (
       </VStack>
     ) : (
       <Text>{t('no')}</Text>
+      
     )}
+    <Button as={RouterLink} to="/home" colorScheme="blue" mt={6}>
+        {t('Back')}
+      </Button>
   </Box>
+  
 );
 
 };

@@ -93,8 +93,8 @@ const HomePage = () => {
             mb={4}
           />
         </FormControl>
-        <Heading as="h2" size="md" mt={6} mb={2}>{t('or')}</Heading>
-        <Input
+        {/* <Heading as="h2" size="md" mt={6} mb={2}>{t('or')}</Heading> */}
+        {/* <Input
             type="text"
             name="ingredients"
             placeholder={t('Enter')}
@@ -102,7 +102,7 @@ const HomePage = () => {
             onChange={(e) => setIngredients(e.target.value)}
             size="lg"
             mb={4}
-          />
+          /> */}
         <Box display="flex" alignItems="center"> 
         
         <Button
@@ -120,9 +120,9 @@ const HomePage = () => {
           {t('search')}
         </Button>
         <Spacer />
-        <Button mt={4} colorScheme="blue" onClick={handleAnalyzeIngredients}>
+        {/* <Button mt={4} colorScheme="blue" onClick={handleAnalyzeIngredients}>
         {t('analyse')}
-      </Button>
+      </Button> */}
       </Box>
       </Box>
     </Box>

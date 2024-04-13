@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
+        path: '/Allergan.github.io/',
         element: <LoginPage />,  //<Outlet/> for http://localhost:5173/
       },
       {

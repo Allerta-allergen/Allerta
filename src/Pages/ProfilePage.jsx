@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Heading, Button, Divider, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [questionnaireAnswer, setQuestionnaireAnswer] = useState('');
+  const {t} = useTranslation();
 
   // Function to handle modifying the questionnaire
   const handleModifyQuestionnaire = () => {
@@ -24,13 +26,20 @@ const ProfilePage = () => {
 
   return (
     <Box p={8}>
-      <Heading as="h1" size="xl">Profile Settings</Heading>
+      <Heading as="h1" size="xl">{t('pr')}</Heading>
       <Divider my={6} />
       <FormControl mb={4}>
-        <FormLabel>Questionnaire Answer</FormLabel>
+        <FormLabel>{t('question1')}</FormLabel>
         <Textarea
-          placeholder="Enter modified questionnaire here..."
-          rows={8}
+          placeholder={t('allto')}
+          rows={2}
+          value={questionnaireAnswer}
+          onChange={(e) => setQuestionnaireAnswer(e.target.value)} // Update questionnaire answer state
+        />
+        <FormLabel>{t('question2')}</FormLabel>
+        <Textarea
+          placeholder={t('have')}
+          rows={2}
           value={questionnaireAnswer}
           onChange={(e) => setQuestionnaireAnswer(e.target.value)} // Update questionnaire answer state
         />

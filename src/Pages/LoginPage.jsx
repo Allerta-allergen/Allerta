@@ -10,9 +10,9 @@ import {
   Text,
   useToast,
   VStack,
-  Spacer
+  HStack,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const LoginPage = () => {
@@ -33,7 +33,7 @@ const LoginPage = () => {
       isClosable: true,
     });
     setTimeout(() => {
-      navigate('/Allergan.github.io/questionnaire');
+      navigate('/Allergan.github.io/home');
     }, 1000);
   };
 
@@ -79,8 +79,20 @@ const LoginPage = () => {
             mt={4}
             onClick={handleLogin}
           >
-            {t('sign')}
+            {t('login')}
           </Button>
+          <HStack mt={4} spacing={2}>
+            <Text color="red">{t('no_account')}{' '}</Text>
+          <Link
+            onClick={() => navigate("/Allergan.github.io/signup")}
+            fontWeight="bold"
+            textDecoration="underline"
+            _hover={{ color: "red.500", textDecoration: "underline" }}
+              >
+    {t('signup')}
+  </Link>
+</HStack>
+
         </Box>
       </Box>
       </VStack>

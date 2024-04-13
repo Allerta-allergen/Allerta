@@ -5,15 +5,17 @@ import Footer from './containers/Footer'
 import './App.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import './i18n';
-
+import { ErrorBoundary } from './ErrorBoundary';
 
 function App() {
 
   return (
     <ChakraProvider>
+      <ErrorBoundary>
     <NavigationBar></NavigationBar>
             <Outlet />
     <Footer></Footer>
+    </ErrorBoundary>
     </ChakraProvider>
   )
 }

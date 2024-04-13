@@ -16,6 +16,7 @@ const resources = {
       username: 'Enter your email',
       pass:'Password',
       password: 'Enter your password ',
+      confirm:'Confirm Password',
       sign: 'Sign up',
       convert: 'Convert Ingredient to Potential Allergen',
       ingredients: 'Enter list of ingredients or upload a photo of a product label',
@@ -34,8 +35,10 @@ const resources = {
       no:'No ingredients data available',
       or:'Or',
       enter: 'Enter',
-      search: 'Search'
-
+      search: 'Search',
+      pr: 'Profile Settings',
+      no_account:'I don\' t have an account',
+      signup: 'Sign Up',
     },
   },
   et: {
@@ -51,6 +54,7 @@ const resources = {
       username: 'Sisesta oma e-posti aadress',
       pass:'parool',
       password: 'Sisesta oma parool ',
+      confirm:'Kinnita salasõna',
       sign: 'Registreeri',
       convert: 'Teisendage koostisosa potentsiaalseks allergeeniks',
       ingredients:'Sisestage koostisosade loend või laadige üles foto tootesildist',
@@ -69,7 +73,10 @@ const resources = {
       no:'Koostisainete andmed puuduvad',
       or:'või',
       enter: 'Sisesta',
-      search: 'otsing'
+      search: 'otsing',
+      pr: 'Profiili seaded',
+      no_account:'Ma pole kontot',
+      signup: 'Registreeri',
     
     },
 

@@ -8,7 +8,9 @@ import {
   Input,
   Heading,
   Text,
-  useToast
+  useToast,
+  VStack,
+  Spacer
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -42,6 +44,11 @@ const LoginPage = () => {
       justify="center"
       bg="gray.100"
     >
+      <VStack spacing={4} align="center">
+      <Box>
+      <Heading as="h2" size="lg">Discover Your Allergen Insights With Just A Photo</Heading>
+      <Heading as="h2" size="md" color="blue.500">Safeguarding Your Health</Heading>
+          </Box>
       <Box p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
         <Box textAlign="center">
           <Heading>{t('login')}</Heading>
@@ -76,6 +83,7 @@ const LoginPage = () => {
           </Button>
         </Box>
       </Box>
+      </VStack>
     </Flex>
   );
 };

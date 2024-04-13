@@ -119,7 +119,7 @@ const HomePage = () => {
         <Box display="flex" alignItems="center"> 
         <VStack>
         {ImagePreview && (
-          <Box mt={4}>
+          <Box mt={4}  maxWidth="200px" maxHeight="200px">
             <img src={ImagePreview} alt="Uploaded Image" />
           </Box>
         )}

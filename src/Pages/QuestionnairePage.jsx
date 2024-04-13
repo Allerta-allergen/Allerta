@@ -24,7 +24,7 @@ const QuestionnairePage = () => {
     // You can handle form submission here
     console.log('I am allergic to:', allergiesAnswer);
     console.log('I have:', relatedConditionsAnswer);
-    navigate('/home')
+    navigate('/Allergan.github.io/home')
 
   };
 

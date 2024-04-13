@@ -31,7 +31,7 @@ const LoginPage = () => {
       isClosable: true,
     });
     setTimeout(() => {
-      navigate('/questionnaire');
+      navigate('/Allergan.github.io/questionnaire');
     }, 1000);
   };
 

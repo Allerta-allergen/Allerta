@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const handleModifyQuestionnaire = () => {
     // Logic to modify questionnaire (e.g., send to server)
     alert('Questionnaire modified!');
-    navigate('/home')
+    navigate('/Allergan.github.io/home')
   };
 
   // Function to handle logout
@@ -18,7 +18,7 @@ const ProfilePage = () => {
     // Logic to logout
     alert('Logged out!');
     setTimeout(() => {
-      navigate('/login');
+      navigate('/Allergan.github.io/login');
     }, 1000);
   };
 

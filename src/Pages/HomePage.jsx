@@ -75,7 +75,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (imageData) {
-      navigate("/results", { state: { imageData } });
+      navigate("/Allergan.github.io/results", { state: { imageData } });
     }
   }, [imageData]);
   
@@ -108,7 +108,7 @@ const HomePage = () => {
         <Button
           as={RouterLink}
           to={{
-            pathname: "/results",
+            pathname: "/Allergan.github.io/results",
             state: {imageData}  
           }}
           colorScheme="blue"

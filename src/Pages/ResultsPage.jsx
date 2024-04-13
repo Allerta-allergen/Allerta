@@ -97,7 +97,7 @@ return (
       <Text>{t('no')}</Text>
       
     )}
-    <Button as={RouterLink} to="/home" colorScheme="blue" mt={6}>
+    <Button as={RouterLink} to="/Allergan.github.io/home" colorScheme="blue" mt={6}>
         {t('Back')}
       </Button>
   </Box>

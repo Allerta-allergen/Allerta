@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,  //<Outlet/> for http://localhost:5173/
       },
       {
-        path: '/login',
+        path: '/Allergan.github.io/login',
         element: <LoginPage />,  //<Outlet/> for http://localhost:5173/
       },
       // {
@@ -27,23 +27,23 @@ const router = createBrowserRouter([
       //   element: <AllergyDetailsPage />,
       // },
       {
-        path: '/questionnaire',
+        path: '/Allergan.github.io/questionnaire',
         element: <QuestionnairePage />,
       },
       {
-        path: '/results',
+        path: '/Allergan.github.io/results',
         element: <ResultsPage />,
       },
       {
-        path: '/resultsIngredients',
+        path: '/Allergan.github.io/resultsIngredients',
         element: <ResultsPageWithIngredients />,
       },
       {
-        path: '/home',
+        path: '/Allergan.github.io/home',
         element: <HomePage />,
       },
       {
-        path: '/profile',
+        path: '/Allergan.github.io/profile',
         element: <ProfilePage />,
       },
     ],

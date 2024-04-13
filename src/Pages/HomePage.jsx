@@ -9,6 +9,8 @@ const HomePage = () => {
 
   const [searchInput, setSearchInput] = useState('');
   const [imageData, setImageData] = useState(null);
+  const [ImagePreview, setImagePreview] = useState('');
+
   const [isUploading, setIsUploading] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Define setIsLoading state
   const navigate = useNavigate();
@@ -52,6 +54,16 @@ const HomePage = () => {
     try {
       setIsUploading(true);
       const file = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imageUrl = e.target.result;
+  
+        // Set the image preview directly
+        setImagePreview(imageUrl); // Assuming setImagePreview is a state setter for image preview
+      };
+      reader.readAsDataURL(file);
+
       const formData = new FormData();
       formData.append('image', file);
       const response = await fetch('https://allerta-58721-7cd6fa500797.herokuapp.com/api/photo', {
@@ -119,7 +131,12 @@ const HomePage = () => {
         >
           {t('search')}
         </Button>
-        <Spacer />
+        {ImagePreview && (
+          <Box mt={4}>
+            <img src={ImagePreview} alt="Uploaded Image" />
+          </Box>
+        )}
+        {/* <Spacer /> */}
         {/* <Button mt={4} colorScheme="blue" onClick={handleAnalyzeIngredients}>
         {t('analyse')}
       </Button> */}

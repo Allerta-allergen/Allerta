@@ -51,7 +51,6 @@ const SignupPage = () => {
         <Box p={8} maxWidth="400px" borderWidth={1} borderRadius={8} boxShadow="lg">
           <Box textAlign="center">
             <Heading>{t('signup')}</Heading>
-            <Text mt={2} color="gray.500">{t('signup_instructions')}</Text>
           </Box>
           <Box mt={4}>
             <FormControl>
@@ -89,7 +88,7 @@ const SignupPage = () => {
             >
               {t('signup')}
             </Button>
-            <Text color="red">
+            <Text >
             <Link onClick={() => navigate("/Allergan.github.io/login")}  >
                 {t('login')}
               </Link>

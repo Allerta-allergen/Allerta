@@ -47,7 +47,7 @@ const ResultsPage = () => {
                       <Text color="red">{t('allmay')} {ingredient.name}</Text>
                     )}
       
-                    {ingredient.description && <Text>{`Description: ${ingredient.description}`}</Text>}
+                    {ingredient.description && <Text style={{ color: 'blue' }}>{`Description: ${ingredient.description}`}</Text>}
                   </VStack>
                 </Box>
               </Card>

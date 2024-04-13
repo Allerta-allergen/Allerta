@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { Box, Heading, FormControl, FormLabel, Input, Button,Spacer } from '@chakra-ui/react';
+import { Box, Heading, FormControl, FormLabel, Input, Button,Spacer, VStack } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -94,6 +94,7 @@ const HomePage = () => {
 
   return (
     <Box p={8}>
+      
       <Heading as="h1" size="xl">{t('convert')}</Heading>
       <Box mt={6}>
         <FormControl>
@@ -116,8 +117,14 @@ const HomePage = () => {
             mb={4}
           /> */}
         <Box display="flex" alignItems="center"> 
-        
-        <Button
+        <VStack>
+        {ImagePreview && (
+          <Box mt={4}>
+            <img src={ImagePreview} alt="Uploaded Image" />
+          </Box>
+        )}
+
+          <Button
           as={RouterLink}
           to={{
             pathname: "/Allergan.github.io/results",
@@ -131,15 +138,12 @@ const HomePage = () => {
         >
           {t('search')}
         </Button>
-        {ImagePreview && (
-          <Box mt={4}>
-            <img src={ImagePreview} alt="Uploaded Image" />
-          </Box>
-        )}
         {/* <Spacer /> */}
         {/* <Button mt={4} colorScheme="blue" onClick={handleAnalyzeIngredients}>
         {t('analyse')}
       </Button> */}
+
+</VStack>
       </Box>
       </Box>
     </Box>

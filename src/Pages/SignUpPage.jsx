@@ -132,7 +132,7 @@ const SignupPage = () => {
               {t('signup')}
             </Button>
             <Text >
-            <Link onClick={() => navigate("/Allergan.github.io/login")}  >
+            <Link onClick={() => navigate("/Allergan.github.io")}  >
                 {t('login')}
               </Link>
               </Text>

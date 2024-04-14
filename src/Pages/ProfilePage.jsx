@@ -20,7 +20,7 @@ const ProfilePage = () => {
     // Logic to logout
     alert('Logged out!');
     setTimeout(() => {
-      navigate('/Allergan.github.io/login');
+      navigate('/Allergan.github.io');
     }, 1000);
   };
 

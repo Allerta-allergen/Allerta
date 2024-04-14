@@ -25,6 +25,45 @@ const LoginPage = () => {
   const handleLogin = () => {
     // Here you can implement your login logic
     // For simplicity, I'm just showing a toast message
+
+
+    if (email.trim() === '' || password.trim() === '') {
+      toast({
+        title: 'Login Failed',
+        description: 'Please enter both email and password',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } 
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    toast({
+      title: 'Login Failed',
+      description: 'Please enter a valid email address',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
+  }
+
+  // Validate password length
+  if (password.length < 6) {
+    toast({
+      title: 'Login Failed',
+      description: 'Password must be at least 6 characters long',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
+  }
+    
+    else {
+
+
     toast({
       title: 'Login',
       description: `Email: ${email}, Password: ${password}`,
@@ -36,6 +75,7 @@ const LoginPage = () => {
       navigate('/Allergan.github.io/home');
     }, 1000);
   };
+}
 
   return (
     <Flex

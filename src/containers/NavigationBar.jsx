@@ -11,7 +11,7 @@ function NavigationBar() {
   const navigate = useNavigate(); // Initialize the navigate function
   const location = useLocation();
 
-  const isLoginPage = location.pathname === "/Allergan.github.io/login";
+  const isLoginPage = location.pathname === "/Allergan.github.io/login" || location.pathname === "/Allergan.github.io/" ;
   const isSignupPage = location.pathname === "/Allergan.github.io/signup";
 
 

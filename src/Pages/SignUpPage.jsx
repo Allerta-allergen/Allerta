@@ -19,11 +19,52 @@ const SignupPage = () => {
   const navigate = useNavigate(); // Move useNavigate inside the component
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const { t } = useTranslation();
 
   const handleSignup = () => {
     // Here you can implement your signup logic
     // For simplicity, I'm just showing a toast message
+
+    // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    toast({
+      title: 'Signup Failed',
+      description: 'Please enter a valid email address',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
+  }
+
+  // Validate password length
+  if (password.length < 6) {
+    toast({
+      title: 'Signup Failed',
+      description: 'Password must be at least 6 characters long',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
+  }
+
+    // Validate password confirmation
+  if (password !== confirmPassword) {
+    toast({
+      title: 'Signup Failed',
+      description: 'Password and confirm password do not match',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+    });
+    return;
+  }
+
+  else{
     toast({
       title: 'Signup',
       description: `Email: ${email}, Password: ${password}`,
@@ -35,6 +76,8 @@ const SignupPage = () => {
       navigate('/Allergan.github.io/questionnaire');
     }, 1000);
   };
+
+}
 
   return (
     <Flex
@@ -67,8 +110,8 @@ const SignupPage = () => {
               <Input
                 type="password"
                 placeholder={t('password')}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </FormControl>
             <FormControl mt={4}>

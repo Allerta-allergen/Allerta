@@ -67,7 +67,7 @@ const SignupPage = () => {
   else{
     toast({
       title: 'Signup',
-      description: `Email: ${email}, Password: ${password}`,
+      description: `Signed in successully`,
       status: 'success',
       duration: 5000,
       isClosable: true,

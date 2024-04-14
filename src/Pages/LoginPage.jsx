@@ -66,7 +66,7 @@ const LoginPage = () => {
 
     toast({
       title: 'Login',
-      description: `Email: ${email}, Password: ${password}`,
+      description: `Logged in successfully`,
       status: 'success',
       duration: 5000,
       isClosable: true,
@@ -85,7 +85,7 @@ const LoginPage = () => {
       bg="gray.100"
     >
       <VStack spacing={4} align="center">
-      <Box>
+      <Box textAlign="center">
       <Heading as="h2" size="lg">{t('discover')}</Heading>
       <Heading as="h2" size="md" color="blue.500">{t('safe')}</Heading>
           </Box>

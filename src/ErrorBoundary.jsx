@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +43,7 @@ function FallbackUI() {
     <div>
       <h1>Oops! Something went wrong.</h1>
       <p>We're redirecting you to the homepage.</p>
+      <Button onClick={navigate('/Allergan.github.io/home')}>Click here</Button>
     </div>
   );
 }

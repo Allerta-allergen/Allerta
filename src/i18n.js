@@ -37,7 +37,7 @@ const resources = {
       enter: 'Enter',
       search: 'Search',
       pr: 'Profile Settings',
-      no_account:'I don\' t have an account',
+      no_account:'Don\'t have an account',
       signup: 'Sign Up',
       discover: 'Discover Your Allergen Insights With Just A Photo',
       safe: 'Safeguarding Your Health'
@@ -77,7 +77,7 @@ const resources = {
       enter: 'Sisesta',
       search: 'otsing',
       pr: 'Profiili seaded',
-      no_account:'Ma pole kontot',
+      no_account:'Pole kontot',
       signup: 'Registreeri',
       discover: 'Avastage oma allergeenide kohta ainult foto',
       safe: 'Teie tervise kaitsmine'

@@ -63,7 +63,7 @@ const QuestionnairePage = () => {
   return (
     <Box p={8}>
       <VStack spacing={6} as="form" onSubmit={handleSubmit}>
-        <Heading as="h1" size="xl">{t('questionnaire')}</Heading>
+        <Heading as="h1" size="xl">{t('questionnare')}</Heading>
         <FormControl isRequired>
           <FormLabel mb={2}>{t('question1')}</FormLabel>
           <VStack align="flex-start" spacing={2} w="100%">

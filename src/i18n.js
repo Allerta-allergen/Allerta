@@ -40,7 +40,14 @@ const resources = {
       no_account:'Don\'t have an account',
       signup: 'Sign Up',
       discover: 'Discover Your Allergen Insights With Just A Photo',
-      safe: 'Safeguarding Your Health'
+      safe: 'Safeguarding Your Health',
+      select_at_least_one_condition: 'Select At least one condition',
+      select_at_least_one_allergen:'Select At least one allergen',
+      select_allergens: 'Select Allergens',
+      select_condition: 'Select Conditions',
+      save:'Save Changes',
+      logout:'Logout'
+
     },
   },
   et: {
@@ -80,7 +87,13 @@ const resources = {
       no_account:'Pole kontot',
       signup: 'Registreeri',
       discover: 'Avastage oma allergeenide kohta ainult foto',
-      safe: 'Teie tervise kaitsmine'
+      safe: 'Teie tervise kaitsmine',
+      select_at_least_one_condition: 'Valige vähemalt üks tingimus',
+      select_at_least_one_allergen:'Valige vähemalt üks allergeen',
+      select_allergens: 'Valige allergeenid',
+      select_condition: 'Vali tingimused',
+      save:"Salvesta muudatused",
+      logout: 'välja logima'
       
     },
 

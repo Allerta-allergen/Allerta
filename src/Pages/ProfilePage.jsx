@@ -44,9 +44,9 @@ const ProfilePage = () => {
           onChange={(e) => setQuestionnaireAnswer(e.target.value)} // Update questionnaire answer state
         />
       </FormControl>
-      <Button colorScheme="blue" onClick={handleModifyQuestionnaire} mb={4}>Save Changes</Button>
+      <Button colorScheme="blue" onClick={handleModifyQuestionnaire} mb={4}>{t('save')}</Button>
       <Divider my={6} />
-      <Button colorScheme="red" onClick={handleLogout}>Logout</Button>
+      <Button colorScheme="red" onClick={handleLogout}>{t('logout')}</Button>
     </Box>
   );
 };
